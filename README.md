@@ -1,2 +1,2 @@
-# nse-stock-analyzer
-Python tool that pulls NSE stock data and calculates trend, momentum, and risk indicators. Built for learning.
+# nse-backtester
+Backtest of a moving-average crossover strategy on NSE large caps, with out-of-sample testing.
