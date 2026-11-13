@@ -2,7 +2,7 @@
 
 *A moving-average strategy on NSE large caps, tested on data it had never seen.*
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhilaan12/nse-backtester/blob/main/nse_backtester.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/dhilaan12/nse-backtester/blob/main/nse-backtester.ipynb)
 
 A backtest of the classic 20/50-day moving-average crossover on RELIANCE, TCS and HDFCBANK, built to answer one question: **if a strategy looks good on past data, does it still work on data it has never seen?**
 
@@ -25,7 +25,7 @@ Spoiler: it didn't beat buy-and-hold. Finding out why was the point, and this re
 | TCS | Buy & hold | -11.2% | -0.36 | -53.4% |
 | TCS | MA crossover | -11.1% | -0.81 | **-36.7%** |
 
-![Test period results](test_period_results.png)
+![Test period results](test_period_results.svg)
 
 *The flat orange stretches are the strategy sitting in cash. On HDFC Bank it missed most of the 2025 rally. On TCS it dodged part of the fall.*
 
@@ -33,15 +33,15 @@ Spoiler: it didn't beat buy-and-hold. Finding out why was the point, and this re
 
 **The whole period, with the train/test split marked.** The dashed line is where the test period begins.
 
-![Equity curves with the split marked](images/equity_curves_split.png)
+![Equity curves with the split marked](equity_curves_split.svg)
 
 **Drawdowns in the test period.** How far each version sat below its previous peak. Shallower is better.
 
-![Drawdowns in the test period](images/drawdowns_test.png)
+![Drawdowns in the test period](drawdowns_test.svg)
 
 **Overfitting, side by side.** Each cell is one pair of moving-average windows, averaged over the three stocks. Left: how it scored on the training years. Right: how the same pair scored on the test years.
 
-![Sharpe heatmaps, train vs test](images/sharpe_heatmaps.png)
+![Sharpe heatmaps, train vs test](sharpe_heatmaps.svg)
 
 ## How the test was set up
 
@@ -96,7 +96,7 @@ Any of these would have produced a more impressive chart. None of them would hav
 
 ## What I learned
 
-*[Write 3-4 sentences yourself, in your own words: what surprised you, what you got wrong at first, what you'd do differently.]*
+I expected the moving-average strategy to beat buy-and-hold, but it didn’t once I included trading costs and tested it on data I hadn’t used to choose the settings. I was surprised that it could still reduce losses by moving to cash, though that also meant missing part of a rally. I also learned how easy it is to make a backtest look convincing by tuning settings on the same data used to judge them. With only three stocks and one test period, I’d want to try more stocks and several test windows before drawing a strong conclusion.
 
 ## How this was built
 
@@ -106,7 +106,9 @@ I wrote this with AI assistance (Claude), in Google Colab. I chose the question,
 
 1. Click the **Open in Colab** badge at the top.
 2. Run all cells (Runtime, then Run all).
-3. Or locally: `pip install -r requirements.txt` and open `nse_backtester.ipynb` in Jupyter.
+3. Or download `nse-backtester.ipynb` and open it in Jupyter after installing the notebook’s dependencies (`yfinance`, `pandas`, `numpy`, and `matplotlib`).
+
+The charts below are committed as SVG files. To regenerate them with updated Yahoo Finance adjusted-close data, run `node build_charts.mjs` from the repository folder.
 
 <details>
 <summary><b>Plain-English glossary</b></summary>
